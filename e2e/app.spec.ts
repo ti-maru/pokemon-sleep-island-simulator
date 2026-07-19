@@ -152,9 +152,9 @@ test("調整後の入力とガイドを利用できる", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "簡易ヘルプ" })).toHaveCount(
     0,
   );
-  expect(
-    await page.getByLabel("IANAタイムゾーン").locator("option").count(),
-  ).toBeGreaterThan(20);
+  await expect
+    .poll(() => page.getByLabel("IANAタイムゾーン").locator("option").count())
+    .toBeGreaterThan(20);
   await page.getByLabel("テーマ").selectOption("dark");
 
   await page.getByRole("button", { name: "個体", exact: true }).click();

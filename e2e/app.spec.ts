@@ -2,7 +2,10 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
 async function createIndividual(page: Page, name = "E2E育成個体") {
-  await page.getByRole("button", { name: "個体" }).click();
+  await page
+    .getByRole("navigation", { name: "メインナビゲーション" })
+    .getByRole("button", { name: "個体", exact: true })
+    .click();
   await page.getByRole("button", { name: "新しい個体を作成" }).click();
   await page.getByRole("textbox", { name: "管理名", exact: true }).fill(name);
   await page.getByRole("button", { name: "個体を保存" }).click();
@@ -129,16 +132,25 @@ test("テーマを切り替えられる", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 });
 
-test("キーボードでナビゲーションへ到達できる", async ({ page }, testInfo) => {
+test("キーボードでナビゲーションへ到達できる", async ({
+  page,
+  browserName,
+}, testInfo) => {
   test.skip(
     testInfo.project.name.includes("iphone") ||
       testInfo.project.name.includes("android"),
     "ハードウェアキーボードの代表検証はデスクトップ構成で実行します。",
   );
   await page.goto("./");
-  await page.keyboard.press("Tab");
-  await expect(page.getByRole("button", { name: "計算" })).toBeFocused();
-  await page.keyboard.press("Tab");
+  const tabKey = browserName === "webkit" ? "Alt+Tab" : "Tab";
+  const navigation = page.getByRole("navigation", {
+    name: "メインナビゲーション",
+  });
+  await page.keyboard.press(tabKey);
+  await expect(
+    navigation.getByRole("button", { name: "計算", exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press(tabKey);
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "預け入れ" })).toBeVisible();
 });

@@ -153,6 +153,15 @@ test("調整後の入力とガイドを利用できる", async ({ page }) => {
   await page.getByRole("button", { name: "ガイド", exact: true }).click();
   await expect(page.getByRole("heading", { name: "簡易ヘルプ" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "更新履歴" })).toBeVisible();
+  await expect(page.getByText("0.3.0", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("link", {
+      name: "github.com/ti-maru/pokemon-sleep-island-simulator",
+    }),
+  ).toHaveAttribute(
+    "href",
+    "https://github.com/ti-maru/pokemon-sleep-island-simulator",
+  );
 
   await page.getByRole("button", { name: "設定", exact: true }).click();
   await expect(page.getByRole("heading", { name: "簡易ヘルプ" })).toHaveCount(

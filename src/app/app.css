@@ -1791,6 +1791,12 @@ input[type="search"],
   gap: 8px;
 }
 
+.repository-link {
+  color: var(--teal-dark);
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 860px) {
   .hero {
     min-height: 280px;

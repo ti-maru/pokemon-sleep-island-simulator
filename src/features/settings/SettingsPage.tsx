@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { useAppDataStore } from "../../app/stores/appDataStore";
-import {
-  formatTimeZoneOption,
-  getTimeZoneOptions,
-} from "../../application/calculate/timeZoneOptions";
+import { getTimeZoneSelectOptions } from "../../application/calculate/timeZoneOptions";
 import { isIanaTimeZone } from "../../application/calculate/dateTime";
 import type { PersistedSettings } from "../../domain/settings/types";
 
@@ -35,11 +32,7 @@ export function SettingsPage() {
   );
   const [message, setMessage] = useState("");
   const timeZoneOptions = useMemo(
-    () =>
-      getTimeZoneOptions(timezone).map((timeZone) => ({
-        value: timeZone,
-        label: formatTimeZoneOption(timeZone, timeZoneReferenceEpochMs),
-      })),
+    () => getTimeZoneSelectOptions(timezone, timeZoneReferenceEpochMs),
     [timeZoneReferenceEpochMs, timezone],
   );
 

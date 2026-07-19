@@ -7,16 +7,38 @@ import {
 import {
   formatTimeZoneOption,
   getTimeZoneOptions,
+  getTimeZoneSelectOptions,
   getUtcOffsetMinutes,
 } from "../application/calculate/timeZoneOptions";
 
 describe("zonedDateTimeToEpochMs", () => {
-  it("provides selectable IANA time zones with preferred values first", () => {
-    const options = getTimeZoneOptions("Europe/London");
+  it("provides unique IANA time zones ordered by current UTC offset", () => {
+    const referenceEpochMs = Date.parse("2026-07-20T00:00:00Z");
+    const options = getTimeZoneOptions("Europe/London", referenceEpochMs);
+    const selectOptions = getTimeZoneSelectOptions(
+      "Europe/London",
+      referenceEpochMs,
+    );
 
-    expect(options.slice(0, 3)).toEqual(["Asia/Tokyo", "UTC", "Europe/London"]);
     expect(new Set(options).size).toBe(options.length);
     expect(options.length).toBeGreaterThan(20);
+    expect(options).toContain("UTC");
+    expect(options).toContain("Asia/Tokyo");
+    expect(options).toContain("Europe/London");
+    expect(selectOptions.map(({ offsetMinutes }) => offsetMinutes)).toEqual(
+      [...selectOptions]
+        .map(({ offsetMinutes }) => offsetMinutes)
+        .sort((left, right) => left - right),
+    );
+    for (let index = 1; index < selectOptions.length; index += 1) {
+      const previous = selectOptions[index - 1]!;
+      const current = selectOptions[index]!;
+      if (previous.offsetMinutes === current.offsetMinutes) {
+        expect(previous.value.localeCompare(current.value, "en")).toBeLessThan(
+          1,
+        );
+      }
+    }
   });
 
   it("formats current UTC offsets including daylight saving and half-hour zones", () => {

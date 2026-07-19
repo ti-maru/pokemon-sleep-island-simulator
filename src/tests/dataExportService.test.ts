@@ -111,6 +111,7 @@ describe("data export service", () => {
       "replace",
     );
 
+    expect(backup.appVersion).toBe("0.3.0");
     expect(safety.payload.histories).toEqual([]);
     expect((await target.listHistories())[0]?.id).toBe(history.id);
     expect((await target.listSnapshots())[0]?.name).toBe(snapshot.name);

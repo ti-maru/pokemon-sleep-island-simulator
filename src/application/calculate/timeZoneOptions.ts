@@ -1,5 +1,3 @@
-const PREFERRED_TIME_ZONES = ["Asia/Tokyo", "UTC"] as const;
-
 const FALLBACK_TIME_ZONES = [
   "Africa/Cairo",
   "Africa/Johannesburg",
@@ -47,19 +45,6 @@ function readSupportedTimeZones(): readonly string[] {
 
 const DISCOVERED_TIME_ZONES = readSupportedTimeZones();
 
-export function getTimeZoneOptions(currentValue?: string): readonly string[] {
-  const preferred = [
-    ...PREFERRED_TIME_ZONES,
-    ...(currentValue === undefined ? [] : [currentValue]),
-  ];
-  const preferredSet = new Set(preferred);
-  const remaining = [...DISCOVERED_TIME_ZONES]
-    .filter((timeZone) => !preferredSet.has(timeZone))
-    .sort((left, right) => left.localeCompare(right, "en"));
-
-  return [...new Set([...preferred, ...remaining])];
-}
-
 export function getUtcOffsetMinutes(
   timeZone: string,
   referenceEpochMs = Date.now(),
@@ -95,10 +80,55 @@ export function formatTimeZoneOption(
   referenceEpochMs = Date.now(),
 ): string {
   const offsetMinutes = getUtcOffsetMinutes(timeZone, referenceEpochMs);
+  return `${formatUtcOffset(offsetMinutes)} — ${timeZone}`;
+}
+
+function formatUtcOffset(offsetMinutes: number): string {
   const absoluteMinutes = Math.abs(offsetMinutes);
   const sign = offsetMinutes >= 0 ? "+" : "-";
   const hours = String(Math.floor(absoluteMinutes / 60)).padStart(2, "0");
   const minutes = String(absoluteMinutes % 60).padStart(2, "0");
 
-  return `UTC${sign}${hours}:${minutes} — ${timeZone}`;
+  return `UTC${sign}${hours}:${minutes}`;
+}
+
+export interface TimeZoneSelectOption {
+  readonly value: string;
+  readonly label: string;
+  readonly offsetMinutes: number;
+}
+
+export function getTimeZoneSelectOptions(
+  currentValue?: string,
+  referenceEpochMs = Date.now(),
+): readonly TimeZoneSelectOption[] {
+  const values = new Set([
+    "UTC",
+    ...DISCOVERED_TIME_ZONES,
+    ...(currentValue === undefined ? [] : [currentValue]),
+  ]);
+
+  return [...values]
+    .map((timeZone) => {
+      const offsetMinutes = getUtcOffsetMinutes(timeZone, referenceEpochMs);
+      return {
+        value: timeZone,
+        label: `${formatUtcOffset(offsetMinutes)} — ${timeZone}`,
+        offsetMinutes,
+      };
+    })
+    .sort(
+      (left, right) =>
+        left.offsetMinutes - right.offsetMinutes ||
+        left.value.localeCompare(right.value, "en"),
+    );
+}
+
+export function getTimeZoneOptions(
+  currentValue?: string,
+  referenceEpochMs = Date.now(),
+): readonly string[] {
+  return getTimeZoneSelectOptions(currentValue, referenceEpochMs).map(
+    ({ value }) => value,
+  );
 }

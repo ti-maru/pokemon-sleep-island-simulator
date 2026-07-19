@@ -17,10 +17,7 @@ import {
   isIanaTimeZone,
   toDateTimeLocalValue,
 } from "../../application/calculate/dateTime";
-import {
-  formatTimeZoneOption,
-  getTimeZoneOptions,
-} from "../../application/calculate/timeZoneOptions";
+import { getTimeZoneSelectOptions } from "../../application/calculate/timeZoneOptions";
 import {
   dataManifest,
   formatPokemonDisplayName,
@@ -386,11 +383,7 @@ export function CalculatorPage() {
   const relaxMode = values.relaxMode;
   const levelEnabled = values.levelEnabled;
   const timeZoneOptions = useMemo(
-    () =>
-      getTimeZoneOptions(values.timezone).map((timeZone) => ({
-        value: timeZone,
-        label: formatTimeZoneOption(timeZone, nowEpochMs),
-      })),
+    () => getTimeZoneSelectOptions(values.timezone, nowEpochMs),
     [nowEpochMs, values.timezone],
   );
   const selectedPokemon = pokemonExpTypeMaster.pokemon.find(

@@ -23,6 +23,10 @@ export function GuidePage() {
         <section className="settings-card">
           <h2>更新履歴</h2>
           <p>
+            <strong>0.3.0</strong> —
+            ライト・ダーク配色、図鑑番号表示、計算画面03の配置を調整し、タイムゾーンをUTCオフセット順に並べました。
+          </p>
+          <p>
             <strong>0.2.0</strong> —
             ダークモードの入力欄、ナビゲーション、ポケモン一覧、EXP補正入力、タイムゾーン選択を改善しました。
           </p>
@@ -30,6 +34,19 @@ export function GuidePage() {
             <strong>0.1.0</strong> —
             計算、個体、預け入れ、履歴、共有、育成計画、グラフ、オフライン対応を初期実装。計算ルールIDは各履歴に保持します。
           </p>
+        </section>
+
+        <section className="settings-card">
+          <h2>GitHubリポジトリ</h2>
+          <p>ソースコードと更新内容をGitHubで確認できます。</p>
+          <a
+            className="repository-link"
+            href="https://github.com/ti-maru/pokemon-sleep-island-simulator"
+            target="_blank"
+            rel="noreferrer"
+          >
+            github.com/ti-maru/pokemon-sleep-island-simulator
+          </a>
         </section>
       </div>
     </main>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">おひるね島の抽象マーク</title>
+  <description id="description">夜空に浮かぶ月と、葉が茂る小さな島を表したオリジナル図形</description>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#17353b"/>
+      <stop offset="1" stop-color="#147d78"/>
+    </linearGradient>
+    <linearGradient id="island" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#9ad5b9"/>
+      <stop offset="1" stop-color="#4f9e82"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#sky)"/>
+  <circle cx="354" cy="152" r="72" fill="#ffe5a1"/>
+  <circle cx="385" cy="127" r="72" fill="#236662"/>
+  <path d="M70 328c54-70 318-70 372 0-17 95-82 136-186 136S87 423 70 328Z" fill="url(#island)"/>
+  <path d="M104 329c63-66 241-84 304 0-80 30-224 31-304 0Z" fill="#dff4a3"/>
+  <path d="M175 325c0-58 26-103 81-127 55 24 81 69 81 127" fill="none" stroke="#77b77c" stroke-width="28" stroke-linecap="round"/>
+  <path d="M256 205c-39-48-80-50-109-8 43 8 70 29 80 61M260 205c37-48 78-50 107-8-41 8-68 29-78 61" fill="#8fce83"/>
+  <circle cx="120" cy="154" r="8" fill="#fff" opacity=".85"/>
+  <circle cx="177" cy="108" r="5" fill="#fff" opacity=".7"/>
+  <circle cx="95" cy="228" r="4" fill="#fff" opacity=".65"/>
+</svg>

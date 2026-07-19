@@ -1,0 +1,34 @@
+{
+  "dataVersion": "2025-07-24-community-verified-v1",
+  "sourceRefs": [
+    "https://wikiwiki.jp/poke_sleep/%E3%81%9B%E3%81%84%E3%81%8B%E3%81%8F"
+  ],
+  "confidence": "single-source",
+  "natures": [
+    { "id": "hardy", "nameJa": "がんばりや", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "lonely", "nameJa": "さみしがり", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "adamant", "nameJa": "いじっぱり", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "naughty", "nameJa": "やんちゃ", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "brave", "nameJa": "ゆうかん", "expEffect": "down", "multiplier": 0.82 },
+    { "id": "bold", "nameJa": "ずぶとい", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "docile", "nameJa": "すなお", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "impish", "nameJa": "わんぱく", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "lax", "nameJa": "のうてんき", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "relaxed", "nameJa": "のんき", "expEffect": "down", "multiplier": 0.82 },
+    { "id": "modest", "nameJa": "ひかえめ", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "mild", "nameJa": "おっとり", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "bashful", "nameJa": "てれや", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "rash", "nameJa": "うっかりや", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "quiet", "nameJa": "れいせい", "expEffect": "down", "multiplier": 0.82 },
+    { "id": "calm", "nameJa": "おだやか", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "gentle", "nameJa": "おとなしい", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "careful", "nameJa": "しんちょう", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "quirky", "nameJa": "きまぐれ", "expEffect": "neutral", "multiplier": 1 },
+    { "id": "sassy", "nameJa": "なまいき", "expEffect": "down", "multiplier": 0.82 },
+    { "id": "timid", "nameJa": "おくびょう", "expEffect": "up", "multiplier": 1.18 },
+    { "id": "hasty", "nameJa": "せっかち", "expEffect": "up", "multiplier": 1.18 },
+    { "id": "jolly", "nameJa": "ようき", "expEffect": "up", "multiplier": 1.18 },
+    { "id": "naive", "nameJa": "むじゃき", "expEffect": "up", "multiplier": 1.18 },
+    { "id": "serious", "nameJa": "まじめ", "expEffect": "neutral", "multiplier": 1 }
+  ]
+}

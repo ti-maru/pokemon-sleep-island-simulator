@@ -1,0 +1,21 @@
+{
+  "dataVersion": "2026-06-16-community-verified-v1",
+  "sourceRefs": [
+    "https://wikiwiki.jp/poke_sleep/%E8%82%B2%E6%88%90/%E7%B5%8C%E9%A8%93%E5%80%A4%E3%82%BF%E3%82%A4%E3%83%97"
+  ],
+  "confidence": "single-source",
+  "coverage": "source-confirmed-non-default-families",
+  "pokemon": [
+    { "id": "mew", "nameJa": "ミュウ", "nameKey": "mew", "evolutionFamilyId": "mew", "expType": 1320, "available": true },
+    { "id": "darkrai", "nameJa": "ダークライ", "nameKey": "darkrai", "evolutionFamilyId": "darkrai", "expType": 1320, "available": true },
+    { "id": "raikou", "nameJa": "ライコウ", "nameKey": "raikou", "evolutionFamilyId": "raikou", "expType": 1080, "available": true },
+    { "id": "entei", "nameJa": "エンテイ", "nameKey": "entei", "evolutionFamilyId": "entei", "expType": 1080, "available": true },
+    { "id": "suicune", "nameJa": "スイクン", "nameKey": "suicune", "evolutionFamilyId": "suicune", "expType": 1080, "available": true },
+    { "id": "cresselia", "nameJa": "クレセリア", "nameKey": "cresselia", "evolutionFamilyId": "cresselia", "expType": 1080, "available": true },
+    { "id": "latias", "nameJa": "ラティアス", "nameKey": "latias", "evolutionFamilyId": "latias", "expType": 1080, "available": true },
+    { "id": "latios", "nameJa": "ラティオス", "nameKey": "latios", "evolutionFamilyId": "latios", "expType": 1080, "available": true },
+    { "id": "dratini", "nameJa": "ミニリュウ", "nameKey": "dratini", "evolutionFamilyId": "dratini", "expType": 900, "available": true },
+    { "id": "larvitar", "nameJa": "ヨーギラス", "nameKey": "larvitar", "evolutionFamilyId": "larvitar", "expType": 900, "available": true },
+    { "id": "bagon", "nameJa": "タツベイ", "nameKey": "bagon", "evolutionFamilyId": "bagon", "expType": 900, "available": true }
+  ]
+}

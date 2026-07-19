@@ -1,0 +1,41 @@
+# Dependencies and package-manager caches
+node_modules/
+.pnpm-store/
+
+# Production and test outputs
+dist/
+coverage/
+playwright-report/
+test-results/
+
+# Tool caches
+.tmp/
+.cache/
+.vite/
+.eslintcache
+*.tsbuildinfo
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Local Codex runtime metadata
+.agents/
+.codex/

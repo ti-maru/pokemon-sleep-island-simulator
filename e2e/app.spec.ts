@@ -135,7 +135,11 @@ test("テーマを切り替えられる", async ({ page }) => {
 test("調整後の入力とガイドを利用できる", async ({ page }) => {
   await page.goto("./");
 
-  await expect(page.getByLabel("ポケモン").locator("option")).toHaveCount(242);
+  await expect(
+    page
+      .getByRole("combobox", { name: "ポケモン", exact: true })
+      .locator("option"),
+  ).toHaveCount(242);
   await page.getByRole("radio", { name: "EXP下降" }).check();
   await expect(page.getByRole("radio", { name: "EXP下降" })).toBeChecked();
   await expect(page.getByText("目標レベル", { exact: true })).toHaveCount(0);

@@ -54,6 +54,22 @@ export const natureMaster = Object.freeze(
 export const pokemonExpTypeMaster = Object.freeze(
   pokemonExpTypeMasterSchema.parse(pokemonExpTypesJson),
 );
+export const pokemonByDexNo = Object.freeze(
+  [...pokemonExpTypeMaster.pokemon].sort(
+    (left, right) => Number(left.dexNo) - Number(right.dexNo),
+  ),
+);
+
+export function formatPokemonDexNo(dexNo: string): string {
+  return Number(dexNo).toString().padStart(3, "0");
+}
+
+export function formatPokemonDisplayName(pokemon: {
+  dexNo: string;
+  nameJa: string;
+}): string {
+  return `No.${formatPokemonDexNo(pokemon.dexNo)} ${pokemon.nameJa}`;
+}
 export const dataManifest = Object.freeze(
   dataManifestSchema.parse(dataManifestJson),
 );

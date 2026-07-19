@@ -3,7 +3,12 @@ import { useCallback, useMemo, useState } from "react";
 import { useAppDataStore } from "../../app/stores/appDataStore";
 import { snapshotIndividual } from "../../application/deposits/depositService";
 import type { IndividualInput } from "../../application/individuals/individualService";
-import { natureMaster, pokemonExpTypeMaster } from "../../data/masterData";
+import {
+  formatPokemonDisplayName,
+  natureMaster,
+  pokemonByDexNo,
+  pokemonExpTypeMaster,
+} from "../../data/masterData";
 import type { PokemonIndividual } from "../../domain/individuals/types";
 import { getExpCurve, getExpToNextLevel } from "../../domain/leveling/expCurve";
 import type { ExpEffect, ExpType } from "../../domain/leveling/types";
@@ -252,9 +257,9 @@ export function IndividualsPage() {
                 }
               >
                 <option value="">未登録・手動タイプ</option>
-                {pokemonExpTypeMaster.pokemon.map((pokemon) => (
+                {pokemonByDexNo.map((pokemon) => (
                   <option key={pokemon.id} value={pokemon.id}>
-                    {pokemon.nameJa}
+                    {formatPokemonDisplayName(pokemon)}
                   </option>
                 ))}
               </select>
@@ -370,7 +375,9 @@ export function IndividualsPage() {
               <article className="entity-card" key={individual.id}>
                 <div className="entity-card-heading">
                   <div>
-                    <span>{pokemon?.nameJa ?? "手動設定"}</span>
+                    <span>
+                      {pokemon ? formatPokemonDisplayName(pokemon) : "手動設定"}
+                    </span>
                     <h2>{individual.displayName}</h2>
                   </div>
                   <strong>Lv.{individual.currentLevel}</strong>

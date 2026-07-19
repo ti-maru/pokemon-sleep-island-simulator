@@ -87,6 +87,9 @@ describe("CalculatorPage", () => {
 
     const pokemon = screen.getByRole("combobox", { name: "ポケモン" });
     expect(pokemon.querySelectorAll("option")).toHaveLength(242);
+    expect(pokemon.querySelectorAll("option")[1]).toHaveTextContent(
+      "No.001 フシギダネ",
+    );
     await user.click(screen.getByRole("radio", { name: "EXP下降" }));
 
     expect(screen.getByRole("radio", { name: "EXP下降" })).toBeChecked();

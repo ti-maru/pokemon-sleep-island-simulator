@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useAppDataStore } from "../../app/stores/appDataStore";
-import { getTimeZoneOptions } from "../../application/calculate/timeZoneOptions";
+import {
+  formatTimeZoneOption,
+  getTimeZoneOptions,
+} from "../../application/calculate/timeZoneOptions";
 import { isIanaTimeZone } from "../../application/calculate/dateTime";
 import type { PersistedSettings } from "../../domain/settings/types";
 
@@ -22,6 +25,7 @@ export function SettingsPage() {
   const snapshots = useAppDataStore((state) => state.snapshots);
   const plans = useAppDataStore((state) => state.plans);
   const [timezone, setTimezone] = useState(settings.timezone);
+  const [timeZoneReferenceEpochMs] = useState(() => Date.now());
   const [storage, setStorage] = useState<{
     usage: number | undefined;
     quota: number | undefined;
@@ -30,6 +34,14 @@ export function SettingsPage() {
     null,
   );
   const [message, setMessage] = useState("");
+  const timeZoneOptions = useMemo(
+    () =>
+      getTimeZoneOptions(timezone).map((timeZone) => ({
+        value: timeZone,
+        label: formatTimeZoneOption(timeZone, timeZoneReferenceEpochMs),
+      })),
+    [timeZoneReferenceEpochMs, timezone],
+  );
 
   useEffect(() => {
     const onPrompt = (event: Event) => {
@@ -140,12 +152,15 @@ export function SettingsPage() {
               value={timezone}
               onChange={(event) => setTimezone(event.target.value)}
             >
-              {getTimeZoneOptions(timezone).map((timeZone) => (
-                <option key={timeZone} value={timeZone}>
-                  {timeZone}
+              {timeZoneOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
                 </option>
               ))}
             </select>
+            <small className="field-help">
+              UTC差は現在時点です。夏時間により変わる場合があります。
+            </small>
           </label>
           <button type="button" onClick={saveTimezone}>
             保存

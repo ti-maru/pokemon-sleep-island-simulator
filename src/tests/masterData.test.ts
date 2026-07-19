@@ -3,8 +3,10 @@ import { describe, expect, it } from "vitest";
 import {
   dataManifest,
   expCurves,
+  formatPokemonDisplayName,
   napIslandRuleSet,
   natureMaster,
+  pokemonByDexNo,
   pokemonExpTypeMaster,
 } from "../data/masterData";
 import { EXP_TYPES } from "../domain/leveling/types";
@@ -69,5 +71,19 @@ describe("master data", () => {
       pokemonExpTypeMaster.pokemon.find(({ nameJa }) => nameJa === "ダークライ")
         ?.expType,
     ).toBe(1320);
+  });
+
+  it("orders Pokémon by Pokédex number and formats numbers with at least 3 digits", () => {
+    const dexNumbers = pokemonByDexNo.map(({ dexNo }) => Number(dexNo));
+
+    expect(dexNumbers).toEqual(
+      [...dexNumbers].sort((left, right) => left - right),
+    );
+    expect(formatPokemonDisplayName(pokemonByDexNo[0]!)).toBe(
+      "No.001 フシギダネ",
+    );
+    expect(
+      formatPokemonDisplayName({ dexNo: "1024", nameJa: "テラパゴス" }),
+    ).toBe("No.1024 テラパゴス");
   });
 });

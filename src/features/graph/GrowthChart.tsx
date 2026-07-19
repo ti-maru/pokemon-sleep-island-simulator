@@ -81,15 +81,17 @@ export function GrowthChart({
             data={[...points]}
             margin={{ top: 20, right: 20, bottom: 8, left: 4 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#d7e7e4" />
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
             <XAxis
               dataKey="day"
               type="number"
               domain={[0, days]}
+              tick={{ fill: "var(--muted)" }}
               tickFormatter={(value: number) => `${Math.round(value)}日`}
             />
             <YAxis
               yAxisId="exp"
+              tick={{ fill: "var(--muted)" }}
               tickFormatter={(value: number) => value.toLocaleString("ja-JP")}
             />
             <YAxis
@@ -97,18 +99,25 @@ export function GrowthChart({
               orientation="right"
               domain={[1, model.levelCap]}
               hide={model.levelState === null}
+              tick={{ fill: "var(--muted)" }}
             />
             <Tooltip
+              contentStyle={{
+                background: "var(--surface)",
+                borderColor: "var(--line)",
+                color: "var(--ink)",
+              }}
+              labelStyle={{ color: "var(--ink)" }}
               formatter={(value, name) => [
                 Number(value).toLocaleString("ja-JP"),
                 name === "exp" ? "累積EXP" : "レベル",
               ]}
               labelFormatter={(value) => `${Number(value).toFixed(1)}日`}
             />
-            <Legend />
+            <Legend wrapperStyle={{ color: "var(--ink)" }} />
             <ReferenceLine
               x={7}
-              stroke="#e18943"
+              stroke="var(--orange)"
               strokeDasharray="5 4"
               label="7日"
             />
@@ -117,7 +126,7 @@ export function GrowthChart({
               name="累積EXP"
               type="monotone"
               dataKey="exp"
-              stroke="#147d78"
+              stroke="var(--teal)"
               strokeWidth={3}
               dot={false}
               isAnimationActive={false}
@@ -128,7 +137,7 @@ export function GrowthChart({
                 name="到達レベル"
                 type="stepAfter"
                 dataKey="level"
-                stroke="#5c9ed8"
+                stroke="var(--blue)"
                 strokeWidth={2}
                 dot={false}
                 isAnimationActive={false}

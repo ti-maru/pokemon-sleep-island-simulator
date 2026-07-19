@@ -59,3 +59,46 @@ export function getTimeZoneOptions(currentValue?: string): readonly string[] {
 
   return [...new Set([...preferred, ...remaining])];
 }
+
+export function getUtcOffsetMinutes(
+  timeZone: string,
+  referenceEpochMs = Date.now(),
+): number {
+  const minuteEpochMs = Math.floor(referenceEpochMs / 60_000) * 60_000;
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    })
+      .formatToParts(new Date(minuteEpochMs))
+      .filter(({ type }) => type !== "literal")
+      .map(({ type, value }) => [type, value]),
+  );
+  const zonedAsUtc = Date.UTC(
+    Number(parts.year),
+    Number(parts.month) - 1,
+    Number(parts.day),
+    Number(parts.hour),
+    Number(parts.minute),
+  );
+
+  return Math.round((zonedAsUtc - minuteEpochMs) / 60_000);
+}
+
+export function formatTimeZoneOption(
+  timeZone: string,
+  referenceEpochMs = Date.now(),
+): string {
+  const offsetMinutes = getUtcOffsetMinutes(timeZone, referenceEpochMs);
+  const absoluteMinutes = Math.abs(offsetMinutes);
+  const sign = offsetMinutes >= 0 ? "+" : "-";
+  const hours = String(Math.floor(absoluteMinutes / 60)).padStart(2, "0");
+  const minutes = String(absoluteMinutes % 60).padStart(2, "0");
+
+  return `UTC${sign}${hours}:${minutes} — ${timeZone}`;
+}

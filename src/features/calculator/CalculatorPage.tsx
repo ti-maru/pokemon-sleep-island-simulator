@@ -17,8 +17,16 @@ import {
   isIanaTimeZone,
   toDateTimeLocalValue,
 } from "../../application/calculate/dateTime";
-import { getTimeZoneOptions } from "../../application/calculate/timeZoneOptions";
-import { dataManifest, pokemonExpTypeMaster } from "../../data/masterData";
+import {
+  formatTimeZoneOption,
+  getTimeZoneOptions,
+} from "../../application/calculate/timeZoneOptions";
+import {
+  dataManifest,
+  formatPokemonDisplayName,
+  pokemonByDexNo,
+  pokemonExpTypeMaster,
+} from "../../data/masterData";
 import type { RelaxSetting } from "../../domain/napIsland/types";
 import messages from "../../i18n/ja.json";
 import { calculatorSchema } from "./calculatorSchema";
@@ -377,6 +385,14 @@ export function CalculatorPage() {
   const endMode = values.endMode;
   const relaxMode = values.relaxMode;
   const levelEnabled = values.levelEnabled;
+  const timeZoneOptions = useMemo(
+    () =>
+      getTimeZoneOptions(values.timezone).map((timeZone) => ({
+        value: timeZone,
+        label: formatTimeZoneOption(timeZone, nowEpochMs),
+      })),
+    [nowEpochMs, values.timezone],
+  );
   const selectedPokemon = pokemonExpTypeMaster.pokemon.find(
     ({ id }) => id === values.pokemonId,
   );
@@ -668,12 +684,15 @@ export function CalculatorPage() {
                   <label>
                     <span>{messages["calculator.timezone"]}</span>
                     <select {...register("timezone")}>
-                      {getTimeZoneOptions(values.timezone).map((timeZone) => (
-                        <option key={timeZone} value={timeZone}>
-                          {timeZone}
+                      {timeZoneOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
                         </option>
                       ))}
                     </select>
+                    <small className="field-help">
+                      UTC差は現在時点です。夏時間により変わる場合があります。
+                    </small>
                     {errors.timezone?.message && (
                       <small className="field-error">
                         {errors.timezone.message}
@@ -814,42 +833,44 @@ export function CalculatorPage() {
                   {messages["calculator.pokemonHeading"]}
                 </h2>
               </div>
-              <div className="two-column-fields">
+              <div className="pokemon-type-controls">
                 <label>
                   <span>{messages["calculator.pokemon"]}</span>
                   <select {...register("pokemonId")}>
                     <option value="">
                       {messages["calculator.pokemonManual"]}
                     </option>
-                    {pokemonExpTypeMaster.pokemon.map((pokemon) => (
+                    {pokemonByDexNo.map((pokemon) => (
                       <option key={pokemon.id} value={pokemon.id}>
-                        {pokemon.nameJa}
+                        {formatPokemonDisplayName(pokemon)}
                       </option>
                     ))}
                   </select>
                 </label>
-                <label>
-                  <span>{messages["calculator.expType"]}</span>
-                  <select
-                    {...register("expType")}
-                    disabled={
-                      selectedPokemon !== undefined && !values.expTypeOverride
-                    }
-                  >
-                    {([600, 900, 1080, 1320] as const).map((expType) => (
-                      <option key={expType} value={expType}>
-                        {expType}タイプ
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <div className="exp-type-field-stack">
+                  <label>
+                    <span>{messages["calculator.expType"]}</span>
+                    <select
+                      {...register("expType")}
+                      disabled={
+                        selectedPokemon !== undefined && !values.expTypeOverride
+                      }
+                    >
+                      {([600, 900, 1080, 1320] as const).map((expType) => (
+                        <option key={expType} value={expType}>
+                          {expType}タイプ
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  {selectedPokemon !== undefined && (
+                    <label className="checkbox-row exp-type-override">
+                      <input type="checkbox" {...register("expTypeOverride")} />
+                      <span>{messages["calculator.overrideExpType"]}</span>
+                    </label>
+                  )}
+                </div>
               </div>
-              {selectedPokemon !== undefined && (
-                <label className="checkbox-row">
-                  <input type="checkbox" {...register("expTypeOverride")} />
-                  <span>{messages["calculator.overrideExpType"]}</span>
-                </label>
-              )}
 
               <div className="subsection">
                 <h3>{messages["calculator.levelHeading"]}</h3>

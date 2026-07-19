@@ -140,6 +140,12 @@ test("調整後の入力とガイドを利用できる", async ({ page }) => {
       .getByRole("combobox", { name: "ポケモン", exact: true })
       .locator("option"),
   ).toHaveCount(242);
+  await expect(
+    page
+      .getByRole("combobox", { name: "ポケモン", exact: true })
+      .locator("option")
+      .nth(1),
+  ).toHaveText("No.001 フシギダネ");
   await page.getByRole("radio", { name: "EXP下降" }).check();
   await expect(page.getByRole("radio", { name: "EXP下降" })).toBeChecked();
   await expect(page.getByText("目標レベル", { exact: true })).toHaveCount(0);
@@ -155,6 +161,9 @@ test("調整後の入力とガイドを利用できる", async ({ page }) => {
   await expect
     .poll(() => page.getByLabel("IANAタイムゾーン").locator("option").count())
     .toBeGreaterThan(20);
+  await expect(page.getByLabel("IANAタイムゾーン")).toContainText(
+    "UTC+09:00 — Asia/Tokyo",
+  );
   await page.getByLabel("テーマ").selectOption("dark");
 
   await page.getByRole("button", { name: "個体", exact: true }).click();
@@ -167,8 +176,46 @@ test("調整後の入力とガイドを利用できる", async ({ page }) => {
     const style = getComputedStyle(element);
     return { background: style.backgroundColor, text: style.color };
   });
-  expect(colors.background).toBe("rgb(16, 40, 43)");
-  expect(colors.text).toBe("rgb(229, 242, 239)");
+  expect(colors.background).toBe("rgb(16, 42, 45)");
+  expect(colors.text).toBe("rgb(237, 247, 245)");
+});
+
+test("ライト・ダーク両テーマで主要画面の文字コントラストを保つ", async ({
+  page,
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== "chromium",
+    "テーマ全画面の代表検証はChromiumで実行します。",
+  );
+
+  await page.goto("./");
+  for (const theme of ["light", "dark"] as const) {
+    await page.getByRole("button", { name: "設定", exact: true }).click();
+    await page.getByLabel("テーマ").selectOption(theme);
+
+    for (const tabName of [
+      "計算",
+      "預け入れ",
+      "個体",
+      "履歴",
+      "ガイド",
+      "設定",
+    ]) {
+      await page.getByRole("button", { name: tabName, exact: true }).click();
+      if (tabName === "計算") {
+        await page
+          .getByRole("combobox", { name: "ポケモン", exact: true })
+          .selectOption("dex-0001");
+      }
+      if (tabName === "個体") {
+        await page.getByRole("button", { name: "新しい個体を作成" }).click();
+      }
+      const results = await new AxeBuilder({ page })
+        .withRules(["color-contrast"])
+        .analyze();
+      expect(results.violations, `${theme}: ${tabName}`).toEqual([]);
+    }
+  }
 });
 
 test("キーボードでナビゲーションへ到達できる", async ({

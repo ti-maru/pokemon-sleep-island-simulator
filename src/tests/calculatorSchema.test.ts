@@ -17,8 +17,6 @@ const validValues: CalculatorFormValues = {
   relaxDays: 7,
   relaxHours: 0,
   relaxMinutes: 0,
-  natureInputMode: "effect",
-  natureId: "serious",
   expEffect: "neutral",
   pokemonId: "",
   expTypeOverride: false,
@@ -27,10 +25,6 @@ const validValues: CalculatorFormValues = {
   currentLevel: 1,
   remainingExpToNextLevel: 54,
   levelCap: 70,
-  targetLevelEnabled: false,
-  targetLevel: 10,
-  targetDateEnabled: false,
-  targetDate: "2026-08-01T00:00",
 };
 
 describe("calculatorSchema", () => {
@@ -59,19 +53,6 @@ describe("calculatorSchema", () => {
       levelEnabled: true,
       currentLevel: 1,
       remainingExpToNextLevel: 55,
-    });
-
-    expect(result.success).toBe(false);
-  });
-
-  it("requires a target level inside the current level and cap", () => {
-    const result = calculatorSchema.safeParse({
-      ...validValues,
-      levelEnabled: true,
-      currentLevel: 20,
-      levelCap: 30,
-      targetLevelEnabled: true,
-      targetLevel: 10,
     });
 
     expect(result.success).toBe(false);

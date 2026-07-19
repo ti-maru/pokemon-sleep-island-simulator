@@ -46,12 +46,28 @@ describe("master data", () => {
     ).toHaveLength(17);
   });
 
-  it("only claims source-confirmed non-default Pokémon families", () => {
+  it("contains the complete reviewed roster and its EXP types", () => {
     expect(pokemonExpTypeMaster.coverage).toBe(
-      "source-confirmed-non-default-families",
+      "implemented-roster-with-exp-types",
+    );
+    expect(pokemonExpTypeMaster.pokemon).toHaveLength(241);
+    expect(new Set(pokemonExpTypeMaster.pokemon.map(({ id }) => id)).size).toBe(
+      pokemonExpTypeMaster.pokemon.length,
     );
     expect(
-      pokemonExpTypeMaster.pokemon.every(({ expType }) => expType !== 600),
-    ).toBe(true);
+      new Set(pokemonExpTypeMaster.pokemon.map(({ nameJa }) => nameJa)).size,
+    ).toBe(pokemonExpTypeMaster.pokemon.length);
+    expect(
+      pokemonExpTypeMaster.pokemon.find(({ nameJa }) => nameJa === "フシギダネ")
+        ?.expType,
+    ).toBe(600);
+    expect(
+      pokemonExpTypeMaster.pokemon.find(({ nameJa }) => nameJa === "カイリュー")
+        ?.expType,
+    ).toBe(900);
+    expect(
+      pokemonExpTypeMaster.pokemon.find(({ nameJa }) => nameJa === "ダークライ")
+        ?.expType,
+    ).toBe(1320);
   });
 });

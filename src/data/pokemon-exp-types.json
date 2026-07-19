@@ -1,21 +1,1698 @@
 {
-  "dataVersion": "2026-06-16-community-verified-v1",
+  "dataVersion": "2026-07-19-community-reviewed-v2",
   "sourceRefs": [
+    "https://wikiwiki.jp/poke_sleep/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%81%AE%E4%B8%80%E8%A6%A7",
     "https://wikiwiki.jp/poke_sleep/%E8%82%B2%E6%88%90/%E7%B5%8C%E9%A8%93%E5%80%A4%E3%82%BF%E3%82%A4%E3%83%97"
   ],
   "confidence": "single-source",
-  "coverage": "source-confirmed-non-default-families",
+  "coverage": "implemented-roster-with-exp-types",
   "pokemon": [
-    { "id": "mew", "nameJa": "ミュウ", "nameKey": "mew", "evolutionFamilyId": "mew", "expType": 1320, "available": true },
-    { "id": "darkrai", "nameJa": "ダークライ", "nameKey": "darkrai", "evolutionFamilyId": "darkrai", "expType": 1320, "available": true },
-    { "id": "raikou", "nameJa": "ライコウ", "nameKey": "raikou", "evolutionFamilyId": "raikou", "expType": 1080, "available": true },
-    { "id": "entei", "nameJa": "エンテイ", "nameKey": "entei", "evolutionFamilyId": "entei", "expType": 1080, "available": true },
-    { "id": "suicune", "nameJa": "スイクン", "nameKey": "suicune", "evolutionFamilyId": "suicune", "expType": 1080, "available": true },
-    { "id": "cresselia", "nameJa": "クレセリア", "nameKey": "cresselia", "evolutionFamilyId": "cresselia", "expType": 1080, "available": true },
-    { "id": "latias", "nameJa": "ラティアス", "nameKey": "latias", "evolutionFamilyId": "latias", "expType": 1080, "available": true },
-    { "id": "latios", "nameJa": "ラティオス", "nameKey": "latios", "evolutionFamilyId": "latios", "expType": 1080, "available": true },
-    { "id": "dratini", "nameJa": "ミニリュウ", "nameKey": "dratini", "evolutionFamilyId": "dratini", "expType": 900, "available": true },
-    { "id": "larvitar", "nameJa": "ヨーギラス", "nameKey": "larvitar", "evolutionFamilyId": "larvitar", "expType": 900, "available": true },
-    { "id": "bagon", "nameJa": "タツベイ", "nameKey": "bagon", "evolutionFamilyId": "bagon", "expType": 900, "available": true }
+    {
+      "id": "dex-0001",
+      "dexNo": "0001",
+      "nameJa": "フシギダネ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0002",
+      "dexNo": "0002",
+      "nameJa": "フシギソウ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0003",
+      "dexNo": "0003",
+      "nameJa": "フシギバナ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0004",
+      "dexNo": "0004",
+      "nameJa": "ヒトカゲ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0005",
+      "dexNo": "0005",
+      "nameJa": "リザード",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0006",
+      "dexNo": "0006",
+      "nameJa": "リザードン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0007",
+      "dexNo": "0007",
+      "nameJa": "ゼニガメ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0008",
+      "dexNo": "0008",
+      "nameJa": "カメール",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0009",
+      "dexNo": "0009",
+      "nameJa": "カメックス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0010",
+      "dexNo": "0010",
+      "nameJa": "キャタピー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0011",
+      "dexNo": "0011",
+      "nameJa": "トランセル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0012",
+      "dexNo": "0012",
+      "nameJa": "バタフリー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0019",
+      "dexNo": "0019",
+      "nameJa": "コラッタ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0020",
+      "dexNo": "0020",
+      "nameJa": "ラッタ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0023",
+      "dexNo": "0023",
+      "nameJa": "アーボ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0024",
+      "dexNo": "0024",
+      "nameJa": "アーボック",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0025",
+      "dexNo": "0025",
+      "nameJa": "ピカチュウ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0025-form-2",
+      "dexNo": "0025",
+      "nameJa": "ピカチュウ(ハロウィン)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0025-form-3",
+      "dexNo": "0025",
+      "nameJa": "ピカチュウ(ホリデー)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0026",
+      "dexNo": "0026",
+      "nameJa": "ライチュウ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0027",
+      "dexNo": "0027",
+      "nameJa": "サンド",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0028",
+      "dexNo": "0028",
+      "nameJa": "サンドパン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0035",
+      "dexNo": "0035",
+      "nameJa": "ピッピ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0036",
+      "dexNo": "0036",
+      "nameJa": "ピクシー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0037",
+      "dexNo": "0037",
+      "nameJa": "ロコン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0037-form-2",
+      "dexNo": "0037",
+      "nameJa": "ロコン(アローラ)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0038",
+      "dexNo": "0038",
+      "nameJa": "キュウコン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0038-form-2",
+      "dexNo": "0038",
+      "nameJa": "キュウコン(アローラ)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0039",
+      "dexNo": "0039",
+      "nameJa": "プリン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0040",
+      "dexNo": "0040",
+      "nameJa": "プクリン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0050",
+      "dexNo": "0050",
+      "nameJa": "ディグダ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0051",
+      "dexNo": "0051",
+      "nameJa": "ダグトリオ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0052",
+      "dexNo": "0052",
+      "nameJa": "ニャース",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0053",
+      "dexNo": "0053",
+      "nameJa": "ペルシアン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0054",
+      "dexNo": "0054",
+      "nameJa": "コダック",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0055",
+      "dexNo": "0055",
+      "nameJa": "ゴルダック",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0056",
+      "dexNo": "0056",
+      "nameJa": "マンキー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0057",
+      "dexNo": "0057",
+      "nameJa": "オコリザル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0058",
+      "dexNo": "0058",
+      "nameJa": "ガーディ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0059",
+      "dexNo": "0059",
+      "nameJa": "ウインディ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0069",
+      "dexNo": "0069",
+      "nameJa": "マダツボミ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0070",
+      "dexNo": "0070",
+      "nameJa": "ウツドン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0071",
+      "dexNo": "0071",
+      "nameJa": "ウツボット",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0074",
+      "dexNo": "0074",
+      "nameJa": "イシツブテ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0075",
+      "dexNo": "0075",
+      "nameJa": "ゴローン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0076",
+      "dexNo": "0076",
+      "nameJa": "ゴローニャ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0079",
+      "dexNo": "0079",
+      "nameJa": "ヤドン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0080",
+      "dexNo": "0080",
+      "nameJa": "ヤドラン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0081",
+      "dexNo": "0081",
+      "nameJa": "コイル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0082",
+      "dexNo": "0082",
+      "nameJa": "レアコイル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0083",
+      "dexNo": "0083",
+      "nameJa": "カモネギ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0084",
+      "dexNo": "0084",
+      "nameJa": "ドードー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0085",
+      "dexNo": "0085",
+      "nameJa": "ドードリオ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0092",
+      "dexNo": "0092",
+      "nameJa": "ゴース",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0093",
+      "dexNo": "0093",
+      "nameJa": "ゴースト",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0094",
+      "dexNo": "0094",
+      "nameJa": "ゲンガー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0095",
+      "dexNo": "0095",
+      "nameJa": "イワーク",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0104",
+      "dexNo": "0104",
+      "nameJa": "カラカラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0105",
+      "dexNo": "0105",
+      "nameJa": "ガラガラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0113",
+      "dexNo": "0113",
+      "nameJa": "ラッキー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0115",
+      "dexNo": "0115",
+      "nameJa": "ガルーラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0122",
+      "dexNo": "0122",
+      "nameJa": "バリヤード",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0127",
+      "dexNo": "0127",
+      "nameJa": "カイロス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0132",
+      "dexNo": "0132",
+      "nameJa": "メタモン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0133",
+      "dexNo": "0133",
+      "nameJa": "イーブイ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0133-form-2",
+      "dexNo": "0133",
+      "nameJa": "イーブイ(ハロウィン)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0133-form-3",
+      "dexNo": "0133",
+      "nameJa": "イーブイ(ホリデー)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0134",
+      "dexNo": "0134",
+      "nameJa": "シャワーズ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0135",
+      "dexNo": "0135",
+      "nameJa": "サンダース",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0136",
+      "dexNo": "0136",
+      "nameJa": "ブースター",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dratini",
+      "dexNo": "0147",
+      "nameJa": "ミニリュウ",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "dragonair",
+      "dexNo": "0148",
+      "nameJa": "ハクリュー",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "dragonite",
+      "dexNo": "0149",
+      "nameJa": "カイリュー",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "mew",
+      "dexNo": "0151",
+      "nameJa": "ミュウ",
+      "expType": 1320,
+      "available": true
+    },
+    {
+      "id": "dex-0152",
+      "dexNo": "0152",
+      "nameJa": "チコリータ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0153",
+      "dexNo": "0153",
+      "nameJa": "ベイリーフ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0154",
+      "dexNo": "0154",
+      "nameJa": "メガニウム",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0155",
+      "dexNo": "0155",
+      "nameJa": "ヒノアラシ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0156",
+      "dexNo": "0156",
+      "nameJa": "マグマラシ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0157",
+      "dexNo": "0157",
+      "nameJa": "バクフーン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0158",
+      "dexNo": "0158",
+      "nameJa": "ワニノコ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0159",
+      "dexNo": "0159",
+      "nameJa": "アリゲイツ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0160",
+      "dexNo": "0160",
+      "nameJa": "オーダイル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0172",
+      "dexNo": "0172",
+      "nameJa": "ピチュー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0173",
+      "dexNo": "0173",
+      "nameJa": "ピィ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0174",
+      "dexNo": "0174",
+      "nameJa": "ププリン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0175",
+      "dexNo": "0175",
+      "nameJa": "トゲピー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0176",
+      "dexNo": "0176",
+      "nameJa": "トゲチック",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0177",
+      "dexNo": "0177",
+      "nameJa": "ネイティ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0178",
+      "dexNo": "0178",
+      "nameJa": "ネイティオ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0179",
+      "dexNo": "0179",
+      "nameJa": "メリープ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0180",
+      "dexNo": "0180",
+      "nameJa": "モココ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0181",
+      "dexNo": "0181",
+      "nameJa": "デンリュウ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0185",
+      "dexNo": "0185",
+      "nameJa": "ウソッキー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0194",
+      "dexNo": "0194",
+      "nameJa": "ウパー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0194-form-2",
+      "dexNo": "0194",
+      "nameJa": "ウパー(パルデア)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0195",
+      "dexNo": "0195",
+      "nameJa": "ヌオー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0196",
+      "dexNo": "0196",
+      "nameJa": "エーフィ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0197",
+      "dexNo": "0197",
+      "nameJa": "ブラッキー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0198",
+      "dexNo": "0198",
+      "nameJa": "ヤミカラス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0199",
+      "dexNo": "0199",
+      "nameJa": "ヤドキング",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0202",
+      "dexNo": "0202",
+      "nameJa": "ソーナンス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0208",
+      "dexNo": "0208",
+      "nameJa": "ハガネール",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0213",
+      "dexNo": "0213",
+      "nameJa": "ツボツボ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0214",
+      "dexNo": "0214",
+      "nameJa": "ヘラクロス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0215",
+      "dexNo": "0215",
+      "nameJa": "ニューラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0225",
+      "dexNo": "0225",
+      "nameJa": "デリバード",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0228",
+      "dexNo": "0228",
+      "nameJa": "デルビル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0229",
+      "dexNo": "0229",
+      "nameJa": "ヘルガー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0242",
+      "dexNo": "0242",
+      "nameJa": "ハピナス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "raikou",
+      "dexNo": "0243",
+      "nameJa": "ライコウ",
+      "expType": 1080,
+      "available": true
+    },
+    {
+      "id": "entei",
+      "dexNo": "0244",
+      "nameJa": "エンテイ",
+      "expType": 1080,
+      "available": true
+    },
+    {
+      "id": "suicune",
+      "dexNo": "0245",
+      "nameJa": "スイクン",
+      "expType": 1080,
+      "available": true
+    },
+    {
+      "id": "larvitar",
+      "dexNo": "0246",
+      "nameJa": "ヨーギラス",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "pupitar",
+      "dexNo": "0247",
+      "nameJa": "サナギラス",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "tyranitar",
+      "dexNo": "0248",
+      "nameJa": "バンギラス",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "dex-0252",
+      "dexNo": "0252",
+      "nameJa": "キモリ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0253",
+      "dexNo": "0253",
+      "nameJa": "ジュプトル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0254",
+      "dexNo": "0254",
+      "nameJa": "ジュカイン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0255",
+      "dexNo": "0255",
+      "nameJa": "アチャモ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0256",
+      "dexNo": "0256",
+      "nameJa": "ワカシャモ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0257",
+      "dexNo": "0257",
+      "nameJa": "バシャーモ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0258",
+      "dexNo": "0258",
+      "nameJa": "ミズゴロウ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0259",
+      "dexNo": "0259",
+      "nameJa": "ヌマクロー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0260",
+      "dexNo": "0260",
+      "nameJa": "ラグラージ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0280",
+      "dexNo": "0280",
+      "nameJa": "ラルトス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0281",
+      "dexNo": "0281",
+      "nameJa": "キルリア",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0282",
+      "dexNo": "0282",
+      "nameJa": "サーナイト",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0287",
+      "dexNo": "0287",
+      "nameJa": "ナマケロ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0288",
+      "dexNo": "0288",
+      "nameJa": "ヤルキモノ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0289",
+      "dexNo": "0289",
+      "nameJa": "ケッキング",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0302",
+      "dexNo": "0302",
+      "nameJa": "ヤミラミ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0303",
+      "dexNo": "0303",
+      "nameJa": "クチート",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0304",
+      "dexNo": "0304",
+      "nameJa": "ココドラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0305",
+      "dexNo": "0305",
+      "nameJa": "コドラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0306",
+      "dexNo": "0306",
+      "nameJa": "ボスゴドラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0311",
+      "dexNo": "0311",
+      "nameJa": "プラスル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0312",
+      "dexNo": "0312",
+      "nameJa": "マイナン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0316",
+      "dexNo": "0316",
+      "nameJa": "ゴクリン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0317",
+      "dexNo": "0317",
+      "nameJa": "マルノーム",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0328",
+      "dexNo": "0328",
+      "nameJa": "ナックラー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0329",
+      "dexNo": "0329",
+      "nameJa": "ビブラーバ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0330",
+      "dexNo": "0330",
+      "nameJa": "フライゴン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0333",
+      "dexNo": "0333",
+      "nameJa": "チルット",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0334",
+      "dexNo": "0334",
+      "nameJa": "チルタリス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0353",
+      "dexNo": "0353",
+      "nameJa": "カゲボウズ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0354",
+      "dexNo": "0354",
+      "nameJa": "ジュペッタ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0359",
+      "dexNo": "0359",
+      "nameJa": "アブソル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0360",
+      "dexNo": "0360",
+      "nameJa": "ソーナノ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0363",
+      "dexNo": "0363",
+      "nameJa": "タマザラシ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0363-form-2",
+      "dexNo": "0363",
+      "nameJa": "タマザラシ(ホリデー)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0364",
+      "dexNo": "0364",
+      "nameJa": "トドグラー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0365",
+      "dexNo": "0365",
+      "nameJa": "トドゼルガ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "bagon",
+      "dexNo": "0371",
+      "nameJa": "タツベイ",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "shelgon",
+      "dexNo": "0372",
+      "nameJa": "コモルー",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "salamence",
+      "dexNo": "0373",
+      "nameJa": "ボーマンダ",
+      "expType": 900,
+      "available": true
+    },
+    {
+      "id": "latias",
+      "dexNo": "0380",
+      "nameJa": "ラティアス",
+      "expType": 1080,
+      "available": true
+    },
+    {
+      "id": "latios",
+      "dexNo": "0381",
+      "nameJa": "ラティオス",
+      "expType": 1080,
+      "available": true
+    },
+    {
+      "id": "dex-0387",
+      "dexNo": "0387",
+      "nameJa": "ナエトル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0388",
+      "dexNo": "0388",
+      "nameJa": "ハヤシガメ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0389",
+      "dexNo": "0389",
+      "nameJa": "ドダイトス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0390",
+      "dexNo": "0390",
+      "nameJa": "ヒコザル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0391",
+      "dexNo": "0391",
+      "nameJa": "モウカザル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0392",
+      "dexNo": "0392",
+      "nameJa": "ゴウカザル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0393",
+      "dexNo": "0393",
+      "nameJa": "ポッチャマ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0394",
+      "dexNo": "0394",
+      "nameJa": "ポッタイシ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0395",
+      "dexNo": "0395",
+      "nameJa": "エンペルト",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0403",
+      "dexNo": "0403",
+      "nameJa": "コリンク",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0404",
+      "dexNo": "0404",
+      "nameJa": "ルクシオ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0405",
+      "dexNo": "0405",
+      "nameJa": "レントラー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0425",
+      "dexNo": "0425",
+      "nameJa": "フワンテ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0426",
+      "dexNo": "0426",
+      "nameJa": "フワライド",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0430",
+      "dexNo": "0430",
+      "nameJa": "ドンカラス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0438",
+      "dexNo": "0438",
+      "nameJa": "ウソハチ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0439",
+      "dexNo": "0439",
+      "nameJa": "マネネ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0440",
+      "dexNo": "0440",
+      "nameJa": "ピンプク",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0442",
+      "dexNo": "0442",
+      "nameJa": "ミカルゲ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0447",
+      "dexNo": "0447",
+      "nameJa": "リオル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0448",
+      "dexNo": "0448",
+      "nameJa": "ルカリオ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0453",
+      "dexNo": "0453",
+      "nameJa": "グレッグル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0454",
+      "dexNo": "0454",
+      "nameJa": "ドクロッグ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0459",
+      "dexNo": "0459",
+      "nameJa": "ユキカブリ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0460",
+      "dexNo": "0460",
+      "nameJa": "ユキノオー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0461",
+      "dexNo": "0461",
+      "nameJa": "マニューラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0462",
+      "dexNo": "0462",
+      "nameJa": "ジバコイル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0468",
+      "dexNo": "0468",
+      "nameJa": "トゲキッス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0470",
+      "dexNo": "0470",
+      "nameJa": "リーフィア",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0471",
+      "dexNo": "0471",
+      "nameJa": "グレイシア",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0475",
+      "dexNo": "0475",
+      "nameJa": "エルレイド",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "cresselia",
+      "dexNo": "0488",
+      "nameJa": "クレセリア",
+      "expType": 1080,
+      "available": true
+    },
+    {
+      "id": "darkrai",
+      "dexNo": "0491",
+      "nameJa": "ダークライ",
+      "expType": 1320,
+      "available": true
+    },
+    {
+      "id": "dex-0517",
+      "dexNo": "0517",
+      "nameJa": "ムンナ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0518",
+      "dexNo": "0518",
+      "nameJa": "ムシャーナ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0557",
+      "dexNo": "0557",
+      "nameJa": "イシズマイ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0558",
+      "dexNo": "0558",
+      "nameJa": "イワパレス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0627",
+      "dexNo": "0627",
+      "nameJa": "ワシボン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0628",
+      "dexNo": "0628",
+      "nameJa": "ウォーグル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0696",
+      "dexNo": "0696",
+      "nameJa": "チゴラス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0697",
+      "dexNo": "0697",
+      "nameJa": "ガチゴラス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0700",
+      "dexNo": "0700",
+      "nameJa": "ニンフィア",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0702",
+      "dexNo": "0702",
+      "nameJa": "デデンネ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0710",
+      "dexNo": "0710",
+      "nameJa": "バケッチャ(ちゅうだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0710-form-2",
+      "dexNo": "0710",
+      "nameJa": "バケッチャ(こだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0710-form-3",
+      "dexNo": "0710",
+      "nameJa": "バケッチャ(おおだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0710-form-4",
+      "dexNo": "0710",
+      "nameJa": "バケッチャ(ギガだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0711",
+      "dexNo": "0711",
+      "nameJa": "パンプジン(ちゅうだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0711-form-2",
+      "dexNo": "0711",
+      "nameJa": "パンプジン(こだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0711-form-3",
+      "dexNo": "0711",
+      "nameJa": "パンプジン(おおだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0711-form-4",
+      "dexNo": "0711",
+      "nameJa": "パンプジン(ギガだま)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0714",
+      "dexNo": "0714",
+      "nameJa": "オンバット",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0715",
+      "dexNo": "0715",
+      "nameJa": "オンバーン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0736",
+      "dexNo": "0736",
+      "nameJa": "アゴジムシ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0737",
+      "dexNo": "0737",
+      "nameJa": "デンヂムシ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0738",
+      "dexNo": "0738",
+      "nameJa": "クワガノン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0742",
+      "dexNo": "0742",
+      "nameJa": "アブリー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0743",
+      "dexNo": "0743",
+      "nameJa": "アブリボン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0759",
+      "dexNo": "0759",
+      "nameJa": "ヌイコグマ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0760",
+      "dexNo": "0760",
+      "nameJa": "キテルグマ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0764",
+      "dexNo": "0764",
+      "nameJa": "キュワワー",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0777",
+      "dexNo": "0777",
+      "nameJa": "トゲデマル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0778",
+      "dexNo": "0778",
+      "nameJa": "ミミッキュ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0780",
+      "dexNo": "0780",
+      "nameJa": "ジジーロン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0845",
+      "dexNo": "0845",
+      "nameJa": "ウッウ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0848",
+      "dexNo": "0848",
+      "nameJa": "エレズン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0849",
+      "dexNo": "0849",
+      "nameJa": "ストリンダー(ハイ)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0849-form-2",
+      "dexNo": "0849",
+      "nameJa": "ストリンダー(ロー)",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0906",
+      "dexNo": "0906",
+      "nameJa": "ニャオハ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0907",
+      "dexNo": "0907",
+      "nameJa": "ニャローテ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0908",
+      "dexNo": "0908",
+      "nameJa": "マスカーニャ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0909",
+      "dexNo": "0909",
+      "nameJa": "ホゲータ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0910",
+      "dexNo": "0910",
+      "nameJa": "アチゲータ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0911",
+      "dexNo": "0911",
+      "nameJa": "ラウドボーン",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0912",
+      "dexNo": "0912",
+      "nameJa": "クワッス",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0913",
+      "dexNo": "0913",
+      "nameJa": "ウェルカモ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0914",
+      "dexNo": "0914",
+      "nameJa": "ウェーニバル",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0921",
+      "dexNo": "0921",
+      "nameJa": "パモ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0922",
+      "dexNo": "0922",
+      "nameJa": "パモット",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0923",
+      "dexNo": "0923",
+      "nameJa": "パーモット",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0974",
+      "dexNo": "0974",
+      "nameJa": "アルクジラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0975",
+      "dexNo": "0975",
+      "nameJa": "ハルクジラ",
+      "expType": 600,
+      "available": true
+    },
+    {
+      "id": "dex-0980",
+      "dexNo": "0980",
+      "nameJa": "ドオー",
+      "expType": 600,
+      "available": true
+    }
   ]
 }

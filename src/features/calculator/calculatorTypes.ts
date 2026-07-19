@@ -10,7 +10,6 @@ import type {
 } from "../../domain/napIsland/types";
 
 export type InputMode = "duration" | "datetime";
-export type NatureInputMode = "nature" | "effect";
 export type RelaxMode = RelaxSetting["mode"];
 
 export interface CalculatorFormValues {
@@ -27,8 +26,6 @@ export interface CalculatorFormValues {
   relaxDays: number;
   relaxHours: number;
   relaxMinutes: number;
-  natureInputMode: NatureInputMode;
-  natureId: string;
   expEffect: ExpEffect;
   pokemonId: string;
   expTypeOverride: boolean;
@@ -37,10 +34,6 @@ export interface CalculatorFormValues {
   currentLevel: number;
   remainingExpToNextLevel: number;
   levelCap: number;
-  targetLevelEnabled: boolean;
-  targetLevel: number;
-  targetDateEnabled: boolean;
-  targetDate: string;
 }
 
 export interface CustomScenario {
@@ -82,9 +75,5 @@ export interface CalculationViewModel {
   readonly sevenDayWaitMinutes: number;
   readonly sevenDayExpDifference: number;
   readonly nextLevelStayMinutes: number | null;
-  readonly targetLevelStayMinutes: number | null;
-  readonly targetLevelMissingExp: number | null;
   readonly maximumReachableLevel: number | null;
-  readonly targetDateStayMinutes: number | null;
-  readonly targetDateRequiresStart: boolean;
 }

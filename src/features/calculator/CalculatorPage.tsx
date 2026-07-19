@@ -16,13 +16,9 @@ import {
   formatEpochInTimeZone,
   isIanaTimeZone,
   toDateTimeLocalValue,
-  zonedDateTimeToEpochMs,
 } from "../../application/calculate/dateTime";
-import {
-  dataManifest,
-  natureMaster,
-  pokemonExpTypeMaster,
-} from "../../data/masterData";
+import { getTimeZoneOptions } from "../../application/calculate/timeZoneOptions";
+import { dataManifest, pokemonExpTypeMaster } from "../../data/masterData";
 import type { RelaxSetting } from "../../domain/napIsland/types";
 import messages from "../../i18n/ja.json";
 import { calculatorSchema } from "./calculatorSchema";
@@ -39,8 +35,7 @@ const GrowthChart = lazy(() => import("../graph/GrowthChart"));
 const MINUTES_PER_DAY = 24 * 60;
 const PREFERENCE_KEYS = {
   inputMode: "nap-island-calculator-input-mode",
-  natureMode: "nap-island-calculator-nature-mode",
-  draft: "nap-island-calculator-draft-v1",
+  draft: "nap-island-calculator-draft-v2",
 } as const;
 
 function readCalculatorDraft(): CalculatorFormValues | null {
@@ -102,12 +97,6 @@ function getDefaultValues(): CalculatorFormValues {
     relaxDays: 7,
     relaxHours: 0,
     relaxMinutes: 0,
-    natureInputMode: readPreference(
-      PREFERENCE_KEYS.natureMode,
-      ["nature", "effect"],
-      "nature",
-    ),
-    natureId: "serious",
     expEffect: "neutral",
     pokemonId: "",
     expTypeOverride: false,
@@ -116,10 +105,6 @@ function getDefaultValues(): CalculatorFormValues {
     currentLevel: 1,
     remainingExpToNextLevel: 54,
     levelCap: 70,
-    targetLevelEnabled: false,
-    targetLevel: 10,
-    targetDateEnabled: false,
-    targetDate: toDateTimeLocalValue(now + 30 * 24 * 60 * 60_000, timezone),
   };
 }
 
@@ -294,22 +279,6 @@ function ResultPanel({
               )}
             </li>
           )}
-          {model.targetLevelStayMinutes !== null && (
-            <li>
-              {messages["insight.targetReachable"].replace(
-                "{duration}",
-                formatDuration(model.targetLevelStayMinutes),
-              )}
-            </li>
-          )}
-          {model.targetLevelMissingExp !== null && (
-            <li>
-              {messages["insight.targetUnreachable"].replace(
-                "{exp}",
-                model.targetLevelMissingExp.toLocaleString("ja-JP"),
-              )}
-            </li>
-          )}
           {model.maximumReachableLevel !== null && (
             <li>
               {messages["insight.maximumLevel"].replace(
@@ -317,9 +286,6 @@ function ResultPanel({
                 String(model.maximumReachableLevel),
               )}
             </li>
-          )}
-          {model.targetDateRequiresStart && (
-            <li>{messages["insight.targetDateNeedsStart"]}</li>
           )}
         </ul>
       </section>
@@ -410,10 +376,7 @@ export function CalculatorPage() {
   const inputMode = values.inputMode;
   const endMode = values.endMode;
   const relaxMode = values.relaxMode;
-  const natureInputMode = values.natureInputMode;
   const levelEnabled = values.levelEnabled;
-  const targetLevelEnabled = values.targetLevelEnabled;
-  const targetDateEnabled = values.targetDateEnabled;
   const selectedPokemon = pokemonExpTypeMaster.pokemon.find(
     ({ id }) => id === values.pokemonId,
   );
@@ -436,12 +399,6 @@ export function CalculatorPage() {
       writePreference(PREFERENCE_KEYS.inputMode, inputMode);
     }
   }, [inputMode]);
-
-  useEffect(() => {
-    if (natureInputMode !== undefined) {
-      writePreference(PREFERENCE_KEYS.natureMode, natureInputMode);
-    }
-  }, [natureInputMode]);
 
   useEffect(() => {
     if (!parsedValues.success) return;
@@ -492,10 +449,8 @@ export function CalculatorPage() {
     await createSavedIndividual({
       pokemonId: validValues.pokemonId || null,
       displayName: saveName.trim(),
-      natureId:
-        validValues.natureInputMode === "nature" ? validValues.natureId : null,
-      expEffectOverride:
-        validValues.natureInputMode === "effect" ? validValues.expEffect : null,
+      natureId: null,
+      expEffectOverride: validValues.expEffect,
       expTypeOverride:
         validValues.expTypeOverride || validValues.pokemonId === ""
           ? model.expType
@@ -505,20 +460,9 @@ export function CalculatorPage() {
         validValues.currentLevel === 70
           ? null
           : validValues.remainingExpToNextLevel,
-      targetLevel: validValues.targetLevelEnabled
-        ? validValues.targetLevel
-        : null,
-      targetDate: validValues.targetDateEnabled
-        ? new Date(
-            zonedDateTimeToEpochMs(
-              validValues.targetDate,
-              validValues.timezone,
-            ),
-          ).toISOString()
-        : null,
-      targetTimezone: validValues.targetDateEnabled
-        ? validValues.timezone
-        : null,
+      targetLevel: null,
+      targetDate: null,
+      targetTimezone: null,
     });
     await recordCalculation(model);
     setSavePanelOpen(false);
@@ -723,24 +667,13 @@ export function CalculatorPage() {
                   )}
                   <label>
                     <span>{messages["calculator.timezone"]}</span>
-                    <input list="timezone-options" {...register("timezone")} />
-                    <datalist id="timezone-options">
-                      {[
-                        values.timezone,
-                        "Asia/Tokyo",
-                        "UTC",
-                        "America/New_York",
-                      ]
-                        .filter(
-                          (timezone, index, list) =>
-                            list.indexOf(timezone) === index,
-                        )
-                        .map((timezone) => (
-                          <option key={timezone} value={timezone}>
-                            {timezone}
-                          </option>
-                        ))}
-                    </datalist>
+                    <select {...register("timezone")}>
+                      {getTimeZoneOptions(values.timezone).map((timeZone) => (
+                        <option key={timeZone} value={timeZone}>
+                          {timeZone}
+                        </option>
+                      ))}
+                    </select>
                     {errors.timezone?.message && (
                       <small className="field-error">
                         {errors.timezone.message}
@@ -846,49 +779,31 @@ export function CalculatorPage() {
 
               <div className="subsection">
                 <h3>{messages["calculator.natureHeading"]}</h3>
-                <div className="inline-choice">
+                <fieldset className="segmented-choice">
+                  <legend className="sr-only">
+                    {messages["calculator.natureHeading"]}
+                  </legend>
                   <label>
-                    <input
-                      type="radio"
-                      value="nature"
-                      {...register("natureInputMode")}
-                    />
-                    {messages["calculator.natureByName"]}
+                    <input type="radio" value="up" {...register("expEffect")} />
+                    <span>{messages["calculator.expUp"]}</span>
                   </label>
                   <label>
                     <input
                       type="radio"
-                      value="effect"
-                      {...register("natureInputMode")}
+                      value="neutral"
+                      {...register("expEffect")}
                     />
-                    {messages["calculator.natureByEffect"]}
+                    <span>{messages["calculator.expNeutral"]}</span>
                   </label>
-                </div>
-                {natureInputMode === "nature" ? (
                   <label>
-                    <span>{messages["calculator.nature"]}</span>
-                    <select {...register("natureId")}>
-                      {natureMaster.natures.map((nature) => (
-                        <option key={nature.id} value={nature.id}>
-                          {nature.nameJa}
-                        </option>
-                      ))}
-                    </select>
+                    <input
+                      type="radio"
+                      value="down"
+                      {...register("expEffect")}
+                    />
+                    <span>{messages["calculator.expDown"]}</span>
                   </label>
-                ) : (
-                  <label>
-                    <span>{messages["calculator.natureHeading"]}</span>
-                    <select {...register("expEffect")}>
-                      <option value="up">{messages["calculator.expUp"]}</option>
-                      <option value="neutral">
-                        {messages["calculator.expNeutral"]}
-                      </option>
-                      <option value="down">
-                        {messages["calculator.expDown"]}
-                      </option>
-                    </select>
-                  </label>
-                )}
+                </fieldset>
               </div>
             </section>
 
@@ -993,55 +908,6 @@ export function CalculatorPage() {
                         )}
                       </label>
                     </details>
-                    <div className="target-box">
-                      <h3>{messages["calculator.targetHeading"]}</h3>
-                      <label className="checkbox-row">
-                        <input
-                          type="checkbox"
-                          {...register("targetLevelEnabled")}
-                        />
-                        <span>{messages["calculator.enableTargetLevel"]}</span>
-                      </label>
-                      {targetLevelEnabled && (
-                        <label className="compact-field">
-                          <span>{messages["calculator.targetLevel"]}</span>
-                          <input
-                            type="number"
-                            min="1"
-                            max="70"
-                            {...register("targetLevel", {
-                              valueAsNumber: true,
-                            })}
-                          />
-                          {errors.targetLevel?.message && (
-                            <small className="field-error">
-                              {errors.targetLevel.message}
-                            </small>
-                          )}
-                        </label>
-                      )}
-                      <label className="checkbox-row">
-                        <input
-                          type="checkbox"
-                          {...register("targetDateEnabled")}
-                        />
-                        <span>{messages["calculator.enableTargetDate"]}</span>
-                      </label>
-                      {targetDateEnabled && (
-                        <label>
-                          <span>{messages["calculator.targetDate"]}</span>
-                          <input
-                            type="datetime-local"
-                            {...register("targetDate")}
-                          />
-                          {errors.targetDate?.message && (
-                            <small className="field-error">
-                              {errors.targetDate.message}
-                            </small>
-                          )}
-                        </label>
-                      )}
-                    </div>
                   </div>
                 )}
               </div>

@@ -35,7 +35,6 @@ function requestedRelaxMinutes(setting: RelaxSetting): number {
 
 export function ActiveDepositPage() {
   const activeDeposit = useAppDataStore((state) => state.activeDeposit);
-  const individuals = useAppDataStore((state) => state.individuals);
   const complete = useAppDataStore((state) => state.completeActiveDeposit);
   const cancel = useAppDataStore((state) => state.cancelActiveDeposit);
   const [now, setNow] = useState(() => Date.now());
@@ -79,14 +78,7 @@ export function ActiveDepositPage() {
         : calculateDepositProjection(activeDeposit, now),
     [activeDeposit, now],
   );
-  const individual =
-    activeDeposit?.individualId === null || activeDeposit === null
-      ? null
-      : (individuals.find(({ id }) => id === activeDeposit.individualId) ??
-        null);
-
   let nextLevelRemaining: number | null = null;
-  let targetLevelRemaining: number | null = null;
   if (activeDeposit !== null && projection !== null) {
     const snapshot = activeDeposit.calculationSnapshot;
     const levelState = snapshot.levelState;
@@ -102,23 +94,6 @@ export function ActiveDepositPage() {
         next.stayMinutes === null
           ? null
           : Math.max(0, next.stayMinutes - projection.stayMinutes);
-    }
-    if (
-      levelState !== null &&
-      individual !== null &&
-      individual.targetLevel !== null
-    ) {
-      const target = findTargetLevelTime({
-        currentState: levelState,
-        targetLevel: individual.targetLevel,
-        curve: getExpCurve(snapshot.expType),
-        relaxSetting: activeDeposit.relaxSetting,
-        natureMultiplier: snapshot.natureMultiplier,
-      });
-      targetLevelRemaining =
-        target.stayMinutes === null
-          ? null
-          : Math.max(0, target.stayMinutes - projection.stayMinutes);
     }
   }
 
@@ -286,12 +261,6 @@ export function ActiveDepositPage() {
                   : formatDuration(nextLevelRemaining)}
               </dd>
             </div>
-            {targetLevelRemaining !== null && (
-              <div>
-                <dt>目標レベルまで</dt>
-                <dd>{formatDuration(targetLevelRemaining)}</dd>
-              </div>
-            )}
           </dl>
 
           <div className="deposit-actions">

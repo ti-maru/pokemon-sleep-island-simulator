@@ -17,8 +17,6 @@ const baseValues: CalculatorFormValues = {
   relaxDays: 7,
   relaxHours: 0,
   relaxMinutes: 0,
-  natureInputMode: "nature",
-  natureId: "serious",
   expEffect: "neutral",
   pokemonId: "",
   expTypeOverride: false,
@@ -27,10 +25,6 @@ const baseValues: CalculatorFormValues = {
   currentLevel: 1,
   remainingExpToNextLevel: 54,
   levelCap: 70,
-  targetLevelEnabled: false,
-  targetLevel: 10,
-  targetDateEnabled: false,
-  targetDate: "2026-08-01T00:00",
 };
 
 describe("buildCalculationViewModel", () => {
@@ -44,22 +38,18 @@ describe("buildCalculationViewModel", () => {
     expect(model.sevenDayWaitMinutes).toBe(24 * 60);
   });
 
-  it("extends the result with level and target calculations", () => {
+  it("extends the result with level calculations", () => {
     const model = buildCalculationViewModel(
       {
         ...baseValues,
         durationDays: 7,
         levelEnabled: true,
-        targetLevelEnabled: true,
-        targetLevel: 10,
       },
       [],
     );
 
     expect(model.levelResult?.afterLevel).toBe(8);
     expect(model.nextLevelStayMinutes).not.toBeNull();
-    expect(model.targetLevelStayMinutes).not.toBeNull();
-    expect(model.scenarios.some(({ id }) => id === "target-level")).toBe(true);
   });
 
   it("normalizes custom scenario settings and compares them", () => {
@@ -95,23 +85,5 @@ describe("buildCalculationViewModel", () => {
 
     expect(model.stayMinutes).toBe(7 * 24 * 60);
     expect(model.expResult.finalExp).toBe(1_050);
-  });
-
-  it("adds a target-date scenario when a start datetime is available", () => {
-    const model = buildCalculationViewModel(
-      {
-        ...baseValues,
-        inputMode: "datetime",
-        startAt: "2026-07-13T02:00",
-        endAt: "2026-07-20T02:00",
-        levelEnabled: true,
-        targetDateEnabled: true,
-        targetDate: "2026-07-27T02:00",
-      },
-      [],
-    );
-
-    expect(model.targetDateStayMinutes).toBe(14 * 24 * 60);
-    expect(model.scenarios.some(({ id }) => id === "target-date")).toBe(true);
   });
 });

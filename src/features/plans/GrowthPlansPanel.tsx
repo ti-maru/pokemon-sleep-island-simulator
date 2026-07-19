@@ -60,7 +60,7 @@ export function GrowthPlansPanel({
   );
   const [targetDate, setTargetDate] = useState(() =>
     individual.targetDate === null
-      ? toDateTimeLocalValue(now + 90 * 24 * 60 * 60_000, timezone)
+      ? ""
       : toDateTimeLocalValue(Date.parse(individual.targetDate), timezone),
   );
   const [options, setOptions] = useState<readonly GrowthPlan[]>([]);
@@ -133,6 +133,9 @@ export function GrowthPlansPanel({
           {message}
         </p>
       )}
+      <p className="plan-input-help">
+        育成計画を作るときだけ、到達させたいレベルと必要なら完了期限を指定します。個体の基本情報には保存されません。
+      </p>
       <div className="plan-generator">
         <label>
           開始日時
@@ -143,7 +146,7 @@ export function GrowthPlansPanel({
           />
         </label>
         <label>
-          目標レベル
+          この計画で到達させるレベル
           <input
             type="number"
             min={individual.currentLevel}
@@ -153,7 +156,7 @@ export function GrowthPlansPanel({
           />
         </label>
         <label>
-          目標日時
+          完了期限（任意）
           <input
             type="datetime-local"
             value={targetDate}

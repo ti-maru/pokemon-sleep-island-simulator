@@ -97,14 +97,13 @@ export const pokemonExpTypeMasterSchema = z
     dataVersion: z.string().min(1),
     sourceRefs: sourceRefsSchema,
     confidence: dataConfidenceSchema,
-    coverage: z.literal("source-confirmed-non-default-families"),
+    coverage: z.literal("implemented-roster-with-exp-types"),
     pokemon: z.array(
       z
         .object({
           id: z.string().min(1),
+          dexNo: z.string().regex(/^\d{4}$/),
           nameJa: z.string().min(1),
-          nameKey: z.string().min(1),
-          evolutionFamilyId: z.string().min(1),
           expType: expTypeSchema,
           available: z.boolean(),
         })

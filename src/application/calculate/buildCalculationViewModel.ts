@@ -84,13 +84,6 @@ function resolveExpType(values: CalculatorFormValues): ExpType {
 }
 
 function resolveNatureMultiplier(values: CalculatorFormValues): number {
-  if (values.natureInputMode === "nature") {
-    return (
-      natureMaster.natures.find(({ id }) => id === values.natureId)
-        ?.multiplier ?? 1
-    );
-  }
-
   return (
     natureMaster.natures.find(({ expEffect }) => expEffect === values.expEffect)
       ?.multiplier ?? 1
@@ -221,8 +214,6 @@ export function buildCalculationViewModel(
   }
 
   let nextLevelStayMinutes: number | null = null;
-  let targetLevelStayMinutes: number | null = null;
-  let targetLevelMissingExp: number | null = null;
 
   if (
     levelState !== null &&
@@ -247,53 +238,6 @@ export function buildCalculationViewModel(
         ),
       );
     }
-  }
-
-  if (levelState !== null && values.targetLevelEnabled) {
-    const targetLevelTime = findTargetLevelTime({
-      currentState: levelState,
-      targetLevel: values.targetLevel,
-      curve,
-      relaxSetting,
-      natureMultiplier,
-    });
-    targetLevelStayMinutes = targetLevelTime.stayMinutes;
-    targetLevelMissingExp = targetLevelTime.reachable
-      ? null
-      : targetLevelTime.missingExp;
-    if (targetLevelTime.stayMinutes !== null) {
-      scenarios.push(
-        createScenario(
-          "target-level",
-          messages["scenario.targetLevel"].replace(
-            "{level}",
-            String(values.targetLevel),
-          ),
-          "automatic",
-          targetLevelTime.stayMinutes,
-        ),
-      );
-    }
-  }
-
-  let targetDateStayMinutes: number | null = null;
-  if (values.targetDateEnabled && startEpochMs !== null) {
-    const targetEpochMs = zonedDateTimeToEpochMs(
-      values.targetDate,
-      values.timezone,
-    );
-    targetDateStayMinutes = calculateCompletedStayMinutes(
-      startEpochMs,
-      targetEpochMs,
-    );
-    scenarios.push(
-      createScenario(
-        "target-date",
-        messages["scenario.targetDate"],
-        "automatic",
-        targetDateStayMinutes,
-      ),
-    );
   }
 
   const maximumMinutes = getMaximumAccumulationMinutes(
@@ -340,10 +284,6 @@ export function buildCalculationViewModel(
     sevenDayWaitMinutes: Math.max(0, thresholdMinutes - stayMinutes),
     sevenDayExpDifference: sevenDayResult.finalExp - expResult.finalExp,
     nextLevelStayMinutes,
-    targetLevelStayMinutes,
-    targetLevelMissingExp,
     maximumReachableLevel: maximumScenario.levelResult?.afterLevel ?? null,
-    targetDateStayMinutes,
-    targetDateRequiresStart: values.targetDateEnabled && startEpochMs === null,
   };
 }

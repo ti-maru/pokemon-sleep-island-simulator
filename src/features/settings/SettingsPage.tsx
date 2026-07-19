@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useAppDataStore } from "../../app/stores/appDataStore";
+import { getTimeZoneOptions } from "../../application/calculate/timeZoneOptions";
 import { isIanaTimeZone } from "../../application/calculate/dateTime";
 import type { PersistedSettings } from "../../domain/settings/types";
 
@@ -49,7 +50,7 @@ export function SettingsPage() {
 
   const saveTimezone = () => {
     if (!isIanaTimeZone(timezone)) {
-      setMessage("有効なIANAタイムゾーンを入力してください。");
+      setMessage("有効なIANAタイムゾーンを選択してください。");
       return;
     }
     void updateSettings({ timezone }).then(() =>
@@ -135,10 +136,16 @@ export function SettingsPage() {
           <h2>日時</h2>
           <label>
             IANAタイムゾーン
-            <input
+            <select
               value={timezone}
               onChange={(event) => setTimezone(event.target.value)}
-            />
+            >
+              {getTimeZoneOptions(timezone).map((timeZone) => (
+                <option key={timeZone} value={timeZone}>
+                  {timeZone}
+                </option>
+              ))}
+            </select>
           </label>
           <button type="button" onClick={saveTimezone}>
             保存
@@ -198,22 +205,6 @@ export function SettingsPage() {
           >
             インストール案内を表示
           </button>
-        </section>
-        <section className="settings-card help-card">
-          <h2>簡易ヘルプ</h2>
-          <ol>
-            <li>計算で滞在条件と育成状態を入力します。</li>
-            <li>結果から個体保存、預け入れ、履歴保存ができます。</li>
-            <li>個体画面では3種類の長期計画を比較できます。</li>
-            <li>引き取り時に実績を入力すると予測差を履歴で確認できます。</li>
-          </ol>
-        </section>
-        <section className="settings-card">
-          <h2>更新履歴</h2>
-          <p>
-            <strong>0.1.0</strong> —
-            計算、個体、預け入れ、履歴、共有、育成計画、グラフ、オフライン対応を初期実装。計算ルールIDは各履歴に保持します。
-          </p>
         </section>
       </div>
     </main>

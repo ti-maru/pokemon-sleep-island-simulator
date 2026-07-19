@@ -28,8 +28,6 @@ export const calculatorSchema = z
     relaxDays: nonNegativeInteger,
     relaxHours: nonNegativeInteger.max(23, "23以下で入力してください。"),
     relaxMinutes: nonNegativeInteger.max(59, "59以下で入力してください。"),
-    natureInputMode: z.enum(["nature", "effect"]),
-    natureId: z.string(),
     expEffect: z.enum(["up", "neutral", "down"]),
     pokemonId: z.string(),
     expTypeOverride: z.boolean(),
@@ -38,10 +36,6 @@ export const calculatorSchema = z
     currentLevel: integer.min(1, "Lv.1以上で入力してください。").max(70),
     remainingExpToNextLevel: nonNegativeInteger,
     levelCap: integer.min(1).max(70),
-    targetLevelEnabled: z.boolean(),
-    targetLevel: integer.min(1).max(70),
-    targetDateEnabled: z.boolean(),
-    targetDate: z.string(),
   })
   .superRefine((values, context) => {
     const duration =
@@ -109,25 +103,5 @@ export const calculatorSchema = z
           message: `このレベルでは${expToNext.toLocaleString("ja-JP")}以下で入力してください。`,
         });
       }
-
-      if (
-        values.targetLevelEnabled &&
-        (values.targetLevel < values.currentLevel ||
-          values.targetLevel > values.levelCap)
-      ) {
-        context.addIssue({
-          code: "custom",
-          path: ["targetLevel"],
-          message: "目標レベルは現在レベル以上、レベル上限以下にしてください。",
-        });
-      }
-    }
-
-    if (values.targetDateEnabled && values.targetDate.length === 0) {
-      context.addIssue({
-        code: "custom",
-        path: ["targetDate"],
-        message: "目標日時を入力してください。",
-      });
     }
   });

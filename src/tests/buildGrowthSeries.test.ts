@@ -18,8 +18,6 @@ const values: CalculatorFormValues = {
   relaxDays: 7,
   relaxHours: 0,
   relaxMinutes: 0,
-  natureInputMode: "effect",
-  natureId: "serious",
   expEffect: "neutral",
   pokemonId: "",
   expTypeOverride: true,
@@ -28,10 +26,6 @@ const values: CalculatorFormValues = {
   currentLevel: 1,
   remainingExpToNextLevel: 54,
   levelCap: 70,
-  targetLevelEnabled: false,
-  targetLevel: 20,
-  targetDateEnabled: false,
-  targetDate: "2026-12-01T00:00",
 };
 
 describe("buildGrowthSeries", () => {

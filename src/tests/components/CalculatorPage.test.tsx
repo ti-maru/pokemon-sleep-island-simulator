@@ -81,6 +81,20 @@ describe("CalculatorPage", () => {
     ).toBeDisabled();
   });
 
+  it("offers the full Pokémon roster and a direct EXP correction choice", async () => {
+    const user = userEvent.setup();
+    render(<CalculatorPage />);
+
+    const pokemon = screen.getByRole("combobox", { name: "ポケモン" });
+    expect(pokemon.querySelectorAll("option")).toHaveLength(242);
+    await user.click(screen.getByRole("radio", { name: "EXP下降" }));
+
+    expect(screen.getByRole("radio", { name: "EXP下降" })).toBeChecked();
+    expect(
+      screen.queryByRole("combobox", { name: "性格" }),
+    ).not.toBeInTheDocument();
+  });
+
   it("shows a nearby validation error for an out-of-range duration", async () => {
     const user = userEvent.setup();
     render(<CalculatorPage />);

@@ -132,6 +132,41 @@ test("テーマを切り替えられる", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
 });
 
+test("調整後の入力とガイドを利用できる", async ({ page }) => {
+  await page.goto("./");
+
+  await expect(page.getByLabel("ポケモン").locator("option")).toHaveCount(242);
+  await page.getByRole("radio", { name: "EXP下降" }).check();
+  await expect(page.getByRole("radio", { name: "EXP下降" })).toBeChecked();
+  await expect(page.getByText("目標レベル", { exact: true })).toHaveCount(0);
+
+  await page.getByRole("button", { name: "ガイド", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "簡易ヘルプ" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "更新履歴" })).toBeVisible();
+
+  await page.getByRole("button", { name: "設定", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "簡易ヘルプ" })).toHaveCount(
+    0,
+  );
+  expect(
+    await page.getByLabel("IANAタイムゾーン").locator("option").count(),
+  ).toBeGreaterThan(20);
+  await page.getByLabel("テーマ").selectOption("dark");
+
+  await page.getByRole("button", { name: "個体", exact: true }).click();
+  await page.getByRole("button", { name: "新しい個体を作成" }).click();
+  const managementName = page.getByRole("textbox", {
+    name: "管理名",
+    exact: true,
+  });
+  const colors = await managementName.evaluate((element) => {
+    const style = getComputedStyle(element);
+    return { background: style.backgroundColor, text: style.color };
+  });
+  expect(colors.background).toBe("rgb(16, 40, 43)");
+  expect(colors.text).toBe("rgb(229, 242, 239)");
+});
+
 test("キーボードでナビゲーションへ到達できる", async ({
   page,
   browserName,

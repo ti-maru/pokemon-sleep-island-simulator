@@ -30,8 +30,14 @@ const SettingsPage = lazy(() =>
     default: module.SettingsPage,
   })),
 );
+const GuidePage = lazy(() =>
+  import("../../features/guide/GuidePage").then((module) => ({
+    default: module.GuidePage,
+  })),
+);
 
-type Page = "calculator" | "deposit" | "individuals" | "history" | "settings";
+type Page =
+  "calculator" | "deposit" | "individuals" | "history" | "guide" | "settings";
 
 export function ApplicationShell() {
   const [page, setPage] = useState<Page>(() =>
@@ -123,6 +129,14 @@ export function ApplicationShell() {
         </button>
         <button
           type="button"
+          aria-current={page === "guide" ? "page" : undefined}
+          onClick={() => setPage("guide")}
+        >
+          <span aria-hidden="true">?</span>
+          {messages["nav.guide"]}
+        </button>
+        <button
+          type="button"
           aria-current={page === "settings" ? "page" : undefined}
           onClick={() => setPage("settings")}
         >
@@ -164,6 +178,7 @@ export function ApplicationShell() {
             {page === "deposit" && <ActiveDepositPage />}
             {page === "individuals" && <IndividualsPage />}
             {page === "history" && <HistoryPage />}
+            {page === "guide" && <GuidePage />}
             {page === "settings" && <SettingsPage />}
           </Suspense>
         </PageErrorBoundary>

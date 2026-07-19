@@ -2,10 +2,6 @@ import { useCallback, useMemo, useState } from "react";
 
 import { useAppDataStore } from "../../app/stores/appDataStore";
 import { snapshotIndividual } from "../../application/deposits/depositService";
-import {
-  toDateTimeLocalValue,
-  zonedDateTimeToEpochMs,
-} from "../../application/calculate/dateTime";
 import type { IndividualInput } from "../../application/individuals/individualService";
 import { natureMaster, pokemonExpTypeMaster } from "../../data/masterData";
 import type { PokemonIndividual } from "../../domain/individuals/types";
@@ -19,48 +15,41 @@ import { useModalFocus } from "../../components/dialogs/useModalFocus";
 interface FormState {
   displayName: string;
   pokemonId: string;
-  natureId: string;
-  expEffectOverride: "" | ExpEffect;
+  expEffect: ExpEffect;
   expTypeOverride: "" | `${ExpType}`;
   currentLevel: number;
   remainingExpToNextLevel: number;
-  targetLevel: string;
-  targetDate: string;
 }
 
 const EMPTY_FORM: FormState = {
   displayName: "",
   pokemonId: "",
-  natureId: "",
-  expEffectOverride: "",
+  expEffect: "neutral",
   expTypeOverride: "",
   currentLevel: 1,
   remainingExpToNextLevel: 54,
-  targetLevel: "",
-  targetDate: "",
 };
 
-function toFormState(
-  individual: PokemonIndividual,
-  timezone: string,
-): FormState {
+function resolveIndividualExpEffect(individual: PokemonIndividual): ExpEffect {
+  if (individual.expEffectOverride !== null)
+    return individual.expEffectOverride;
+  return (
+    natureMaster.natures.find(({ id }) => id === individual.natureId)
+      ?.expEffect ?? "neutral"
+  );
+}
+
+function toFormState(individual: PokemonIndividual): FormState {
   return {
     displayName: individual.displayName,
     pokemonId: individual.pokemonId ?? "",
-    natureId: individual.natureId ?? "",
-    expEffectOverride: individual.expEffectOverride ?? "",
+    expEffect: resolveIndividualExpEffect(individual),
     expTypeOverride:
       individual.expTypeOverride === null
         ? ""
         : (String(individual.expTypeOverride) as `${ExpType}`),
     currentLevel: individual.currentLevel,
     remainingExpToNextLevel: individual.remainingExpToNextLevel ?? 0,
-    targetLevel:
-      individual.targetLevel === null ? "" : String(individual.targetLevel),
-    targetDate:
-      individual.targetDate === null
-        ? ""
-        : toDateTimeLocalValue(Date.parse(individual.targetDate), timezone),
   };
 }
 
@@ -73,12 +62,12 @@ function resolveExpType(form: FormState): ExpType {
   );
 }
 
-function toIndividualInput(form: FormState, timezone: string): IndividualInput {
+function toIndividualInput(form: FormState): IndividualInput {
   return {
     pokemonId: form.pokemonId || null,
     displayName: form.displayName.trim(),
-    natureId: form.natureId || null,
-    expEffectOverride: form.expEffectOverride || null,
+    natureId: null,
+    expEffectOverride: form.expEffect,
     expTypeOverride:
       form.expTypeOverride === ""
         ? null
@@ -86,14 +75,9 @@ function toIndividualInput(form: FormState, timezone: string): IndividualInput {
     currentLevel: form.currentLevel,
     remainingExpToNextLevel:
       form.currentLevel === 70 ? null : form.remainingExpToNextLevel,
-    targetLevel: form.targetLevel === "" ? null : Number(form.targetLevel),
-    targetDate:
-      form.targetDate === ""
-        ? null
-        : new Date(
-            zonedDateTimeToEpochMs(form.targetDate, timezone),
-          ).toISOString(),
-    targetTimezone: form.targetDate === "" ? null : timezone,
+    targetLevel: null,
+    targetDate: null,
+    targetTimezone: null,
   };
 }
 
@@ -145,7 +129,7 @@ export function IndividualsPage() {
 
   const openEdit = (individual: PokemonIndividual) => {
     setEditingId(individual.id);
-    setForm(toFormState(individual, timezone));
+    setForm(toFormState(individual));
     setFormError(null);
   };
 
@@ -169,14 +153,7 @@ export function IndividualsPage() {
         );
         return;
       }
-      if (
-        form.targetLevel !== "" &&
-        Number(form.targetLevel) < form.currentLevel
-      ) {
-        setFormError("目標レベルは現在レベル以上にしてください。");
-        return;
-      }
-      const input = toIndividualInput(form, timezone);
+      const input = toIndividualInput(form);
       if (editingId === "new") {
         await createIndividual(input);
       } else if (editingId !== null) {
@@ -282,40 +259,34 @@ export function IndividualsPage() {
                 ))}
               </select>
             </label>
-            <label>
-              <span>{messages["individuals.nature"]}</span>
-              <select
-                value={form.natureId}
-                onChange={(event) =>
-                  setForm({ ...form, natureId: event.target.value })
-                }
-              >
-                <option value="">未選択</option>
-                {natureMaster.natures.map((nature) => (
-                  <option key={nature.id} value={nature.id}>
-                    {nature.nameJa}
-                  </option>
+            <div>
+              <span className="field-label">
+                {messages["individuals.expEffect"]}
+              </span>
+              <fieldset className="segmented-choice">
+                <legend className="sr-only">
+                  {messages["individuals.expEffect"]}
+                </legend>
+                {(["up", "neutral", "down"] as const).map((effect) => (
+                  <label key={effect}>
+                    <input
+                      type="radio"
+                      name="individual-exp-effect"
+                      value={effect}
+                      checked={form.expEffect === effect}
+                      onChange={() => setForm({ ...form, expEffect: effect })}
+                    />
+                    <span>
+                      {effect === "up"
+                        ? messages["calculator.expUp"]
+                        : effect === "down"
+                          ? messages["calculator.expDown"]
+                          : messages["calculator.expNeutral"]}
+                    </span>
+                  </label>
                 ))}
-              </select>
-            </label>
-            <label>
-              <span>{messages["individuals.expEffectOverride"]}</span>
-              <select
-                value={form.expEffectOverride}
-                onChange={(event) =>
-                  setForm({
-                    ...form,
-                    expEffectOverride: event.target
-                      .value as FormState["expEffectOverride"],
-                  })
-                }
-              >
-                <option value="">性格から自動</option>
-                <option value="up">EXP上昇</option>
-                <option value="neutral">無補正</option>
-                <option value="down">EXP下降</option>
-              </select>
-            </label>
+              </fieldset>
+            </div>
             <label>
               <span>{messages["individuals.expTypeOverride"]}</span>
               <select
@@ -360,28 +331,6 @@ export function IndividualsPage() {
                     ...form,
                     remainingExpToNextLevel: Number(event.target.value),
                   })
-                }
-              />
-            </label>
-            <label>
-              <span>{messages["individuals.targetLevel"]}</span>
-              <input
-                type="number"
-                min={form.currentLevel}
-                max="70"
-                value={form.targetLevel}
-                onChange={(event) =>
-                  setForm({ ...form, targetLevel: event.target.value })
-                }
-              />
-            </label>
-            <label>
-              <span>{messages["individuals.targetDate"]}</span>
-              <input
-                type="datetime-local"
-                value={form.targetDate}
-                onChange={(event) =>
-                  setForm({ ...form, targetDate: event.target.value })
                 }
               />
             </label>
@@ -437,11 +386,13 @@ export function IndividualsPage() {
                     </dd>
                   </div>
                   <div>
-                    <dt>目標</dt>
+                    <dt>EXP補正</dt>
                     <dd>
-                      {individual.targetLevel === null
-                        ? "未設定"
-                        : `Lv.${individual.targetLevel}`}
+                      {resolveIndividualExpEffect(individual) === "up"
+                        ? "上昇"
+                        : resolveIndividualExpEffect(individual) === "down"
+                          ? "下降"
+                          : "無補正"}
                     </dd>
                   </div>
                 </dl>

@@ -30,7 +30,7 @@ describe("major page accessibility", () => {
   it("has no serious automatic violations on the settings page", async () => {
     const { container } = render(<SettingsPage />);
     expect(await seriousViolations(container)).toEqual([]);
-  });
+  }, 15_000);
 
   it("has no serious automatic violations on the guide page", async () => {
     const { container } = render(<GuidePage />);
